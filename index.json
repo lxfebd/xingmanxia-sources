@@ -1,0 +1,73 @@
+{
+  "name": "星漫匣源市场 / 能力市场",
+  "sources": [
+    {
+      "id": "demo.dsl.wenku8",
+      "name": "文库8 演示源（CSS 选择器）",
+      "type": "novel",
+      "version": "1.0.0",
+      "author": "星漫匣官方",
+      "description": "源市场演示源：CSS 选择器解析章节/内容，验证源市场一键安装全链路。",
+      "baseUrl": "https://www.wenku8.net",
+      "rules": {
+        "searchUrl": "/modules/article/search.php?searchkey={kw}",
+        "searchItem": "table#novelist .grid tr td:first-child a",
+        "searchTitle": "text",
+        "searchLink": "href",
+        "chapterListUrl": "{base}/modules/article/reader.php?aid={id}",
+        "chapterItem": "td.ccss a",
+        "chapterTitle": "text",
+        "chapterLink": "href"
+      },
+      "enabled": true
+    },
+    {
+      "id": "demo.dsl.manhuadb",
+      "name": "漫画DB 演示源（正则）",
+      "type": "comic",
+      "version": "1.0.0",
+      "author": "星漫匣官方",
+      "description": "源市场演示源：正则解析，验证源市场一键安装全链路。",
+      "baseUrl": "https://www.manhuadb.com",
+      "rules": {
+        "searchUrl": "/search?keyword={kw}",
+        "searchItem": "regex:list-group-item a",
+        "chapterItem": "regex:li a",
+        "imageUrl": "regex:data-src=\"([^\"]+)\""
+      },
+      "enabled": true
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "ai.colorize.ddcolor",
+      "name": "AI 上色",
+      "category": "ai",
+      "version": "1.0.0",
+      "author": "星漫匣上色团队",
+      "description": "本地 DDColor 黑白漫画上色（桌面端，权重运行期下载）",
+      "weights": [
+        {
+          "name": "ddcolor.tflite",
+          "url": "https://github.com/lxfebd/xingmanxia-sources/releases/download/models-v1/ddcolor_fp32.tflite",
+          "sizeBytes": 225863636,
+          "sha256": "c08aa1f86d84c7c514b6e80e8925a75a7dd51fa17df670c85610b28b7b813cc7"
+        }
+      ]
+    },
+    {
+      "id": "ai.frame.rife",
+      "name": "AI 插帧",
+      "category": "video",
+      "version": "1.0.0",
+      "author": "星漫匣插帧团队",
+      "description": "本地 RIFE 视频补帧（桌面端，引擎运行期下载）",
+      "artifact": {
+        "url": "https://github.com/lxfebd/xingmanxia-sources/releases/download/models-v1/rife-engine-win.zip",
+        "sha256": {
+          "windows-x64": "f2df934b53d157f0c21bea21bc921cb22ce5e9d1781f6538d2825b5d05d0cf98"
+        }
+      }
+    }
+  ]
+}
