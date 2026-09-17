@@ -115,6 +115,37 @@
         "picListUrl": "https://www.wenku8.net/{id}",
         "picListCss": "div#content p"
       }
+    },
+    {
+      "id": "demo.dsl.manhua",
+      "name": "漫画演示源（通用结构）",
+      "type": "comic",
+      "version": "1.0.0",
+      "author": "星漫匣官方",
+      "description": "源市场演示源：标准漫画站通用结构（分类列表 + 章节目录 + 章节图片），验证源市场一键安装全链路与 comic 型 DSL 解析。",
+      "baseUrl": "https://www.mangabz.com",
+      "headers": {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
+        "Accept-Language": "zh-CN,zh;q=0.9"
+      },
+      "categoryListUrl": "https://www.mangabz.com/mangalist/{page}.html",
+      "categoryList": {
+        "css": "div.mh-item",
+        "name": "p.title a|text",
+        "id": "p.title a|href",
+        "url": "p.title a|href",
+        "pic": "img.lazy|data-original"
+      },
+      "detailUrl": "https://www.mangabz.com/{id}",
+      "detail": {
+        "title": "h1.book-title",
+        "description": ".book-desc",
+        "chapters": ".chapter-list a",
+        "chapterUrl": "href",
+        "picListUrl": "https://www.mangabz.com/{id}",
+        "picListCss": ".read-img img",
+        "picAttr": "data-original"
+      }
     }
   ],
   "capabilities": [
