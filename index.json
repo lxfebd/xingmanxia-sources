@@ -182,6 +182,14 @@
         "pic": "r3",
         "url": "r1"
       },
+      "searchUrl": "https://www.mangabz.com/search/{keyword}.html",
+      "search": {
+        "regex": "<a href=\"([^\"]+)\" title=\"([^\"]+)\">[^<]*</a>[\\s\\S]*?<img data-src=\"([^\"]+)\"",
+        "id": "r1",
+        "name": "r2",
+        "pic": "r3",
+        "url": "r1"
+      },
       "detailUrl": "https://www.mangabz.com/{id}",
       "detail": {
         "title": "h1.book-title",
@@ -217,6 +225,16 @@
         "id": "p a|href",
         "url": "p a|href",
         "pic": "img|data-original"
+      },
+      "detailUrl": "https://www.mangabz.com/{id}",
+      "detail": {
+        "title": "h1.book-title",
+        "description": ".book-desc",
+        "chapters": ".chapter-list a",
+        "chapterUrl": "href",
+        "picListUrl": "https://www.mangabz.com/{id}",
+        "picListCss": ".read-img img",
+        "picAttr": "data-original"
       }
     }
   ],
