@@ -106,6 +106,18 @@
         "name": "td a|text",
         "id": "td a|href"
       },
+      "categoriesUrl": "https://www.wenku8.net/catindex.html",
+      "categories": {
+        "css": "div.nav a",
+        "itemName": "text",
+        "itemUrl": "href"
+      },
+      "categoryListUrl": "https://www.wenku8.net/cat/{categoryId}.html",
+      "categoryList": {
+        "css": "ul.booklist li",
+        "name": "a|text",
+        "id": "a|href"
+      },
       "detailUrl": "https://www.wenku8.net/{id}",
       "detail": {
         "title": "h1.book-title",
