@@ -2,40 +2,119 @@
   "name": "星漫匣源市场 / 能力市场",
   "sources": [
     {
-      "id": "demo.dsl.wenku8",
-      "name": "文库8 演示源（CSS 选择器）",
+      "id": "wche_dm",
+      "name": "风车动漫",
+      "type": "video",
+      "version": "1.0.0",
+      "author": "星漫匣",
+      "description": "stui 系动漫站（16dns 镜像）。详情页 id 带 166 前缀（如 fcdm/16613410.html），播放页 id 为剥离前缀值（13410），用 detail.idRegex 的 id 命名组做映射。播放页 URL 形如 /co_e/{id}-0-{ep}.html，第二段固定为 0，故 season 恒为 0，必须用 chaptersRe 的 season 命名组抽取（chapters CSS 路径会把 season 固定成 1）。chaptersRe 用负向前瞻排除详情页顶部的「立即播放」按钮（与第 0 集同 href，不排除会顶掉第 01 集的标题）。播放地址是播放页内联脚本变量 var now 的 m3u8 直链。标题尾部混有评分 span，用 titleRe 剥离。",
+      "baseUrl": "https://www.16dns.com",
+      "hosts": [
+        "www.16dns.com"
+      ],
+      "imageHosts": [
+        "www.mdzypic.com",
+        "tu.moduzytupian.com",
+        "www.moduzytuuu.com"
+      ],
+      "headers": {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept-Language": "zh-CN,zh;q=0.9"
+      },
+      "requiresLogin": false,
+      "categoryListUrl": "https://www.16dns.com/html/{categoryId}-{page}.html",
+      "categoryList": {
+        "css": "a.stui-vodlist__thumb[data-original]",
+        "id": "href",
+        "name": "title",
+        "pic": "data-original"
+      },
+      "detailUrl": "https://www.16dns.com/{id}",
+      "detail": {
+        "title": "h1.title",
+        "titleRe": "^(.*?\\S)\\s*\\d{1,2}\\.\\d$",
+        "cover": "div.stui-content__thumb img",
+        "coverAttr": "data-original",
+        "description": "p.desc",
+        "chaptersRe": "<a[^>]*href=\"(?<href>/co_e/\\d+-(?<season>\\d+)-\\d+\\.html)\"[^>]*>(?!立即播放)(?<title>[^<]+)</a>",
+        "idRegex": "166(?<id>\\d+)",
+        "picListUrl": "https://www.16dns.com/co_e/{id}-0-{episode}.html",
+        "picListRe": "var\\s+now=\"([^\"]+)\"",
+        "m3u8Rewrite": {
+          "kkzycdn.com:65": "play.modujx16.com",
+          "https://kkzycdn.com:65": "https://play.modujx16.com"
+        }
+      }
+    },
+    {
+      "id": "ashan_yy",
+      "name": "鞍山影院",
+      "type": "video",
+      "version": "1.0.0",
+      "author": "星漫匣",
+      "description": "stui/ewave 模板影视站（dainyew 镜像，PowerCMS）。详情页 id 与播放页 id 一致（pptv/1230130），线路号写在 /tvplay/{id}-{season}-{episode}.html 里，用 chaptersRe 的 season 命名组提取，因此多线路影片能完整展开成多组剧集。站点整页用 HTML 数字实体转义中文（&#26757;&#27604;），htmlUnescape 已处理。播放地址在播放页 script 的 player_aaaa JSON 的 url 字段，斜杠被转义为 \\/，需 picReplace 还原为正常路径。",
+      "baseUrl": "https://www.dainyew.com",
+      "hosts": [
+        "www.dainyew.com"
+      ],
+      "imageHosts": [
+        "www.dainyew.com"
+      ],
+      "headers": {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept-Language": "zh-CN,zh;q=0.9"
+      },
+      "requiresLogin": false,
+      "categoryListUrl": "https://www.dainyew.com/listnew/{categoryId}-{page}.html",
+      "categoryList": {
+        "css": "div.ewave-vodlist__thumb[data-original]",
+        "id": "a.thumb-link|href",
+        "name": "title",
+        "pic": "data-original"
+      },
+      "detailUrl": "https://www.dainyew.com/{id}",
+      "detail": {
+        "title": "h1.title",
+        "titleRe": "^(.*?\\S)\\s*\\d{1,2}\\.\\d$",
+        "cover": "div.ewave-content__thumb img",
+        "coverAttr": "data-original",
+        "description": "p.desc",
+        "chaptersRe": "<a[^>]*href=\"(?<href>/tvplay/\\d+-(?<season>\\d+)-(?<ep>\\d+)\\.html)\"[^>]*>(?<title>[^<]+)</a>",
+        "idRegex": "(?<id>\\d+)",
+        "picListUrl": "https://www.dainyew.com/tvplay/{id}-{season}-{episode}.html",
+        "picListRe": "\"url\":\"([^\"]+)\"",
+        "picReplace": {
+          "\\/": "/"
+        }
+      }
+    },
+    {
+      "id": "demo.dsl.biquge",
+      "name": "笔趣阁 演示源（通用结构）",
       "type": "novel",
       "version": "1.0.0",
       "author": "星漫匣官方",
-      "description": "源市场演示源：CSS 选择器解析章节/内容，验证源市场一键安装全链路。",
+      "description": "源市场演示源：笔趣阁系通用结构（搜索表 + 章节目录 + 正文段落），验证源市场一键安装全链路与 novel 型 DSL 解析。",
       "baseUrl": "https://www.wenku8.net",
-      "rules": {
-        "searchUrl": "/modules/article/search.php?searchkey={kw}",
-        "searchItem": "table#novelist .grid tr td:first-child a",
-        "searchTitle": "text",
-        "searchLink": "href",
-        "chapterListUrl": "{base}/modules/article/reader.php?aid={id}",
-        "chapterItem": "td.ccss a",
-        "chapterTitle": "text",
-        "chapterLink": "href"
+      "headers": {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
+        "Accept-Language": "zh-CN,zh;q=0.9"
       },
-      "enabled": true
-    },
-    {
-      "id": "demo.dsl.manhuadb",
-      "name": "漫画DB 演示源（正则）",
-      "type": "comic",
-      "version": "1.0.0",
-      "author": "星漫匣官方",
-      "description": "源市场演示源：正则解析，验证源市场一键安装全链路。",
-      "baseUrl": "https://www.manhuadb.com",
-      "rules": {
-        "searchUrl": "/search?keyword={kw}",
-        "searchItem": "regex:list-group-item a",
-        "chapterItem": "regex:li a",
-        "imageUrl": "regex:data-src=\"([^\"]+)\""
+      "searchUrl": "https://www.wenku8.net/modules/article/search.php?searchkey={keyword}",
+      "search": {
+        "css": "table#novelist tr.grid",
+        "name": "td a|text",
+        "id": "td a|href"
       },
-      "enabled": true
+      "detailUrl": "https://www.wenku8.net/{id}",
+      "detail": {
+        "title": "h1.book-title",
+        "description": "p.info",
+        "chapters": "div.listmain dd a",
+        "chapterUrl": "href",
+        "picListUrl": "https://www.wenku8.net/{id}",
+        "picListCss": "div#content p"
+      }
     }
   ],
   "capabilities": [
