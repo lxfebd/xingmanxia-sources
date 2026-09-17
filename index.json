@@ -146,6 +146,63 @@
         "picListCss": ".read-img img",
         "picAttr": "data-original"
       }
+    },
+    {
+      "id": "demo.dsl.regex",
+      "name": "正则抽取演示源",
+      "type": "comic",
+      "version": "1.0.0",
+      "author": "星漫匣官方",
+      "description": "源市场演示源：正则行式抽取（regex + r1/r2/r3 捕获组），验证 DSL 正则抽取通道（列表/章节/图片全用正则）。",
+      "baseUrl": "https://www.mangabz.com",
+      "headers": {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
+        "Accept-Language": "zh-CN,zh;q=0.9"
+      },
+      "categoryListUrl": "https://www.mangabz.com/mangalist/{page}.html",
+      "categoryList": {
+        "regex": "<a href=\"([^\"]+)\" title=\"([^\"]+)\">[^<]*</a>[\\s\\S]*?<img data-src=\"([^\"]+)\"",
+        "id": "r1",
+        "name": "r2",
+        "pic": "r3",
+        "url": "r1"
+      },
+      "detailUrl": "https://www.mangabz.com/{id}",
+      "detail": {
+        "title": "h1.book-title",
+        "description": ".book-desc",
+        "chaptersRe": "<a href=\"(?<href>[^\"]+)\"[^>]*>(?<title>[^<]+)</a>",
+        "picListUrl": "https://www.mangabz.com/{id}",
+        "picListRe": "<img src=\"([^\"]+)\"",
+        "picAttr": "src"
+      }
+    },
+    {
+      "id": "demo.dsl.category",
+      "name": "分类导航演示源",
+      "type": "comic",
+      "version": "1.0.0",
+      "author": "星漫匣官方",
+      "description": "源市场演示源：分类导航（categoriesUrl + categories），验证分类页下拉与分类内容列表。",
+      "baseUrl": "https://www.mangabz.com",
+      "headers": {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
+        "Accept-Language": "zh-CN,zh;q=0.9"
+      },
+      "categoriesUrl": "https://www.mangabz.com/classify.html",
+      "categories": {
+        "css": "div.nav a",
+        "itemName": "text",
+        "itemUrl": "href"
+      },
+      "categoryListUrl": "https://www.mangabz.com/cat/{categoryId}.html",
+      "categoryList": {
+        "css": "div.pic",
+        "name": "p a|text",
+        "id": "p a|href",
+        "url": "p a|href",
+        "pic": "img|data-original"
+      }
     }
   ],
   "capabilities": [
